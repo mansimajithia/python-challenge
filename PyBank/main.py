@@ -3,53 +3,51 @@ import os
 import csv
 
 #Set path for file
-csvpath ='../Resources/budget_data.csv'
+csvpath ='./Resources/budget_data.csv'
 
 #Set Variables
 months = []
 total_revenue = []
-greatest_increase = []
-greatest_decrease = []
+greatest_increase = 0
+greatest_decrease = 0
 revenue = 0
+previous_revenue = 0
+revenue_change = []
+row = []
 
-#Read in the csv file
+#Read in the csv file -- 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     print(csvreader)
-    csv_header = next(csvreader)
-    print(f"CSV Header: {csvheader}")
-    # Count Total # of months and total net amount
+    # csv_header = next(csvreader)
+    # print(f"CSV Header: {csv_header}")
     for row in csvreader: 
         months.append(row[0])
-        total_revenue.append(int(row[1]))
-#Total months = length of months
-#total revenue = length of revenue
-# print(len(months)) #---DO I NEED  A PRINT?
-# print(len(total_revenue)) #---- DO I NEED A PRINT?
-
-#Loop through to compare profit/losses to previous row and set revenue to 0 
-# SHOULD ALL OF THIS BE UNDER FOR ROW LOOP?
+        total_revenue.append(row[1])
+        monthly_rev_change = int(row[1])- previous_revenue
+        revenue_change.append(monthly_rev_change)
+        if (monthly_rev_change > greatest_increase):
+            greatest_increase_month = row [0]
+            greatest_increase = monthly_rev_change
+        elif (monthly_rev_change < greatest_decrease):
+            greatest_decrease_month = row [0]
+            greatest_decrease = monthly_rev_change
+        previous_revenue = int(row[1])
+print(greatest_increase_month)
+print(sum(total_revenue))
 total_months = len(months)
-total_revenue = len(revenue) #DOES THIS MEAN TOTAL PROFITS/LOSSES OR COUNT; IT MEANS COUNT
-# total_revenue = revenue + 1
-average_change = (total_revenue/total_months)
-revenue = 0
-for x in range(len(total_revenue)): #HOW DOES IT KNOW IT'S ROW [1]?
-    if revenue >= greatest_increase
-        greatest_increase = revenue
-        month_increase = months
-    elif revenue <= greatest_decrease
-        greatest_decreae = revenue
-        month_decrease = months
+print(total_months)
+print(greatest_increase)
+print(greatest_decrease)
+print(greatest_decrease_month)
 
-        #Print the Following Information
-Print("Financial Analysis")
-Print("---------------------------")
-Print(f"Total Months: + {total_months}")
-Print(f"Total + {int(total_revenue)}")
-Print(f"Greatest Increase in Profits: + {month_increase} + ({greatest_increase})")
-Print(f"Greatest Decrease in Profits: + {month_decrease} + ({greatest_decrease})")
+#Print Financial Analysis
+print("Financial Analysis")
+print("---------------------------")
+print(f"Total Months: {total_months}")
+print(f"Total: ${final_total_revenue}")
+print(f"Average Change: ${average}")
+print(f"Greatest Increase in Profits: {greatest_increase_month} $({greatest_increase})")
+print(f"Greatest Decrease in Profits: {greatest_decrease_month} $({greatest_decrease})")
 
-outpath = os.path.join("..","output", "budget_data.txt")
-with open(output_path, 'w') as textfile:
-    textwriter = textwriter(textfile)
+#Export to text file
