@@ -51,3 +51,16 @@ print(f"Greatest Increase in Profits: {greatest_increase_month} $({greatest_incr
 print(f"Greatest Decrease in Profits: {greatest_decrease_month} $({greatest_decrease})")
 
 #Export to text file
+outpath = os.path.join("..","output", "budget_data.txt")
+with open(outputpath, 'w') as outputfile:
+    textwriter = textwriter(textfile)
+
+    outputfile.write("Financial Analysis\n")
+    outputfile.write("---------------------------\n")
+    outputfile.write(f"Total Months: + {total_months}\n")
+    outputfile.write(f"Total + {int(total_revenue)}\n")
+    outputfile.write(f"Greatest Increase in Profits: + {month_increase} + ({greatest_increase})\n")
+    outputfile.write(f"Greatest Decrease in Profits: + {month_decrease} + ({greatest_decrease})")
+
+for lines in line:
+    print(line)
