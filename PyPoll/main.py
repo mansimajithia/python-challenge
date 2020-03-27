@@ -39,7 +39,7 @@ for votes_received in (votes_received_list):
     percent_received_list.append(percent_received)
     if percent_received > highest_percent:
         highest_percent = percent_received
-        winner_is = (f"Winner is: {candidates_list[an_index]}")
+        winner_is = (f"{candidates_list[an_index]}")
     an_index +=1
 
 # print(total_votes)
@@ -57,3 +57,15 @@ print(f"{candidates_list[2]}: {round(percent_received_list[2])}% ({votes_receive
 print(f"{candidates_list[3]}: {round(percent_received_list[3])}% ({votes_received_list[3]})")
 print("----------------------------")
 print(f"Winner: {winner_is}")
+
+with open("election_data.txt", 'w') as file:
+    # textwriter = textwriter(textfile)
+
+    file.write("Election Results\n")
+    file.write("----------------------------\n")
+    file.write(f"{candidates_list[0]}: {round(percent_received_list[0])}% ({votes_received_list[0]})\n")
+    file.write(f"{candidates_list[1]}: {round(percent_received_list[1])}% ({votes_received_list[1]})\n")
+    file.write(f"{candidates_list[2]}: {round(percent_received_list[2])}% ({votes_received_list[2]})\n")
+    file.write(f"{candidates_list[3]}: {round(percent_received_list[3])}% ({votes_received_list[3]})\n")
+    file.write("----------------------------\n")
+    file.write(f"Winner: {winner_is}")

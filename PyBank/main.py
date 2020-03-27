@@ -33,17 +33,17 @@ with open(csvpath) as csvfile:
              greatest_decrease_month = row [0]
              greatest_decrease = monthly_rev_change
         previous_revenue = int(row[1])
-print(greatest_increase_month)
+# print(greatest_increase_month)
 # print(total_revenue)
-print(sum(total_revenue))
+# print(sum(total_revenue))
 total_months = len(months)
-print(total_months)
-print(greatest_increase)
-print(greatest_decrease)
-print(greatest_decrease_month)
+# print(total_months)
+# print(greatest_increase)
+# print(greatest_decrease)
+# print(greatest_decrease_month)
 total_revenue_change =(sum(revenue_change))
 average_change = (total_revenue_change/(total_months))
-print(average_change)
+# print(average_change)
 
 #Print Financial Analysis
 print("Financial Analysis")
