@@ -6,8 +6,8 @@ import csv
 csvpath ='./Resources/budget_data.csv'
 
 #Set Variables
-months = []
-total_revenue = []
+total_months = 0
+total_revenue = 0
 greatest_increase = 0
 greatest_decrease = 0
 revenue = 0
@@ -22,47 +22,30 @@ with open(csvpath) as csvfile:
     csv_header = next(csvreader)
     # print(f"CSV Header: {csv_header}")
     for row in csvreader: 
-        months.append(row[0])
-        total_revenue.append(int(row[1]))
-        monthly_rev_change = int(row[1])- previous_revenue
-        revenue_change.append(monthly_rev_change)
-        if (monthly_rev_change > greatest_increase):
-            greatest_increase_month = row [0]
-            greatest_increase = monthly_rev_change
-        elif (monthly_rev_change < greatest_decrease):
-             greatest_decrease_month = row [0]
-             greatest_decrease = monthly_rev_change
+        # Total Months
+        total_months += 1
+
+        # Total Revenue
+        total_revenue = total_revenue + (int(row[1]))
+        # Revenue FChange
+        monthly_revenue_change = int(row[1]) - previous_revenue
         previous_revenue = int(row[1])
-# print(greatest_increase_month)
-# print(total_revenue)
-# print(sum(total_revenue))
-total_months = len(months)
-# print(total_months)
-# print(greatest_increase)
-# print(greatest_decrease)
-# print(greatest_decrease_month)
-total_revenue_change =(sum(revenue_change))
-average_change = (total_revenue_change/(total_months))
-# print(average_change)
+        revenue_change.append(monthly_revenue_change)
+
+        average_revenue_change = round(sum(revenue_change)/(total_months),2)
+
+        if (monthly_revenue_change > greatest_increase):
+            greatest_increase_month = row [0]
+            greatest_increase = monthly_revenue_change
+        elif (monthly_revenue_change < greatest_decrease):
+             greatest_decrease_month = row [0]
+             greatest_decrease = monthly_revenue_change
 
 #Print Financial Analysis
 print("Financial Analysis")
 print("---------------------------")
-print(f"Total Months: {len(months)}")
-print(f"Total: ${sum(total_revenue)}")
-print(f"Average Change: ${average_change}")
+print(f"Total Months: {total_months}")
+print(f"Total: ${total_revenue}")
+print(f"Average Change: ${average_revenue_change}")
 print(f"Greatest Increase in Profits: {greatest_increase_month} $({greatest_increase})")
 print(f"Greatest Decrease in Profits: {greatest_decrease_month} $({greatest_decrease})")
-
-#Export to text file
-# "budget_data.txt"
-with open("budget_data.txt", 'w') as file:
-    # textwriter = textwriter(textfile)
-
-    file.write("Financial Analysis\n")
-    file.write("---------------------------\n")
-    file.write(f"Total Months: {total_months}\n")
-    file.write(f"Total + ${sum(total_revenue)}\n")
-    file.write(f"Average Change: ${average_change}\n")
-    file.write(f"Greatest Increase in Profits: + {greatest_increase_month} + ({greatest_increase})\n")
-    file.write(f"Greatest Decrease in Profits: + {greatest_decrease_month} + ({greatest_decrease})")
